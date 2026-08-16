@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Planner</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==============================
+         AUTH SCREEN
+    =============================== -->
+
+    <section id="authScreen" class="auth-screen">
+
+        <div class="auth-card">
+
+            <div class="logo">
+                📚
+            </div>
+
+            <h1>Study Planner</h1>
+
+            <p class="auth-subtitle">
+                Build your routine. Track your progress.
+            </p>
+
+            <div class="auth-tabs">
+                <button id="loginTab" class="active">
+                    Log In
+                </button>
+
+                <button id="signupTab">
+                    Sign Up
+                </button>
+            </div>
+
+            <form id="authForm">
+
+                <div id="nameField" class="input-group hidden">
+                    <label>Name</label>
+
+                    <input
+                        type="text"
+                        id="nameInput"
+                        placeholder="Your name"
+                    >
+                </div>
+
+                <div class="input-group">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="emailInput"
+                        placeholder="you@example.com"
+                        required
+                    >
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        id="passwordInput"
+                        placeholder="••••••••"
+                        required
+                    >
+
+                </div>
+
+                <button type="submit" class="primary-btn">
+                    <span id="authButtonText">Log In</span>
+                </button>
+
+            </form>
+
+            <p id="authMessage" class="auth-message"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         MAIN APP
+    =============================== -->
+
+    <section id="app" class="app hidden">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    📚
+                </div>
+
+                <div>
+                    <h2>Study Planner</h2>
+                    <span>Focus. Learn. Grow.</span>
+                </div>
+
+            </div>
+
+
+            <nav>
+
+                <button
+                    class="nav-item active"
+                    data-page="dashboard"
+                >
+                    🏠
+                    <span>Dashboard</span>
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-page="calendar"
+                >
+                    📅
+                    <span>Calendar</span>
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-page="goals"
+                >
+                    🎯
+                    <span>Goals</span>
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-page="pomodoro"
+                >
+                    🍅
+                    <span>Pomodoro</span>
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-page="subjects"
+                >
+                    📚
+                    <span>Subjects</span>
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-page="settings"
+                >
+                    ⚙️
+                    <span>Settings</span>
+                </button>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <div class="founder-card">
+
+                    <small>FOUNDER</small>
+
+                    <strong>
+                        MD. Sharif Hossain Tasin
+                    </strong>
+
+                </div>
+
+
+                <button id="logoutBtn" class="logout-btn">
+                    🚪 Log Out
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <p id="greeting">
+                        Good morning 👋
+                    </p>
+
+                    <h1 id="pageTitle">
+                        Dashboard
+                    </h1>
+
+                </div>
+
+
+                <div class="topbar-right">
+
+                    <div class="streak-badge">
+                        🔥
+                        <span id="streakValue">0</span>
+                        day streak
+                    </div>
+
+                    <button
+                        id="themeBtn"
+                        class="icon-btn"
+                        title="Toggle theme"
+                    >
+                        🌙
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- ==============================
+                 DASHBOARD
+            =============================== -->
+
+            <section
+                id="dashboard"
+                class="page active-page"
+            >
+
+                <div class="welcome-card glass">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            TODAY'S STUDY GOAL
+                        </span>
+
+                        <h2>
+                            Make today count.
+                        </h2>
+
+                        <p>
+                            Small progress every day creates
+                            big results.
+                        </p>
+
+                    </div>
+
+
+                    <div class="goal-progress">
+
+                        <div class="progress-circle">
+
+                            <span id="heroProgress">
+                                0%
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STAT CARDS -->
+
+                <div class="stats-grid">
+
+
+                    <div class="stat-card glass">
+
+                        <div class="stat-icon">
+                            ⏱️
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Today
+                            </span>
+
+                            <strong id="todayHours">
+                                0h 0m
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card glass">
+
+                        <div class="stat-icon">
+                            📈
+                        </div>
+
+                        <div>
+
+                            <span>
+                                This Week
+                            </span>
+
+                            <strong id="weekHours">
+                                0h 0m
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card glass">
+
+                        <div class="stat-icon">
+                            🔥
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Study Streak
+                            </span>
+
+                            <strong id="dashboardStreak">
+                                0 days
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card glass">
+
+                        <div class="stat-icon">
+                            ✅
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Tasks Completed
+                            </span>
+
+                            <strong id="completedTasks">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROGRESS -->
+
+                <div class="two-column">
+
+
+                    <div class="panel glass">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    DAILY PROGRESS
+                                </span>
+
+                                <h3>
+                                    Today's Study
+                                </h3>
+
+                            </div>
+
+                            <span
+                                id="dailyPercentage"
+                                class="percentage"
+                            >
+                                0%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div
+                                id="dailyProgressBar"
+                                class="progress-fill"
+                                style="width:0%"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="progress-meta">
+
+                            <span>
+                                <b id="todayMinutes">
+                                    0
+                                </b>
+                                minutes studied
+                            </span>
+
+                            <span>
+                                Target:
+                                <b id="targetMinutes">
+                                    120
+                                </b>
+                                min
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel glass">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    TASKS
+                                </span>
+
+                                <h3>
+                                    Today's Tasks
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div id="taskList">
+
+                            <div class="empty-state">
+                                No tasks yet.
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            id="addTaskBtn"
+                            class="secondary-btn"
+                        >
+                            + Add Task
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WEEKLY PROGRESS -->
+
+                <div class="panel glass weekly-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                ANALYTICS
+                            </span>
+
+                            <h3>
+                                Weekly Progress
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="weeklyChart"
+                        class="weekly-chart"
+                    >
+
+                        <div class="chart-placeholder">
+                            Your weekly study activity will appear here.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 CALENDAR
+            =============================== -->
+
+            <section
+                id="calendar"
+                class="page"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            PLAN AHEAD
+                        </span>
+
+                        <h2>
+                            Calendar
+                        </h2>
+
+                        <p>
+                            Plan exams, assignments and study sessions.
+                        </p>
+
+                    </div>
+
+                    <button
+                        id="addEventBtn"
+                        class="primary-btn"
+                    >
+                        + Add Event
+                    </button>
+
+                </div>
+
+
+                <div class="calendar-layout">
+
+                    <div class="calendar-box glass">
+
+                        <div class="calendar-header">
+
+                            <button id="prevMonth">
+                                ‹
+                            </button>
+
+                            <h3 id="calendarMonth">
+                                Month
+                            </h3>
+
+                            <button id="nextMonth">
+                                ›
+                            </button>
+
+                        </div>
+
+
+                        <div class="calendar-weekdays">
+
+                            <span>Sun</span>
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+
+                        </div>
+
+
+                        <div
+                            id="calendarDays"
+                            class="calendar-days"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="panel glass">
+
+                        <span class="eyebrow">
+                            SELECTED DAY
+                        </span>
+
+                        <h3 id="selectedDate">
+                            Select a date
+                        </h3>
+
+                        <div id="eventList">
+
+                            <div class="empty-state">
+                                Nothing planned.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 GOALS
+            =============================== -->
+
+            <section
+                id="goals"
+                class="page"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            YOUR TARGETS
+                        </span>
+
+                        <h2>
+                            Goals
+                        </h2>
+
+                        <p>
+                            Turn your plans into achievable goals.
+                        </p>
+
+                    </div>
+
+                    <button
+                        id="addGoalBtn"
+                        class="primary-btn"
+                    >
+                        + New Goal
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="goalsList"
+                    class="goal-grid"
+                >
+
+                    <div class="empty-state glass">
+                        No goals yet. Create your first goal.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 POMODORO
+            =============================== -->
+
+            <section
+                id="pomodoro"
+                class="page"
+            >
+
+                <div class="pomodoro-page">
+
+                    <span class="eyebrow">
+                        DEEP FOCUS
+                    </span>
+
+                    <h2>
+                        Pomodoro Timer
+                    </h2>
+
+                    <p>
+                        Focus for a while. Rest. Repeat.
+                    </p>
+
+
+                    <div class="pomodoro-card glass">
+
+                        <div class="timer-mode">
+
+                            <button
+                                class="timer-mode-btn active"
+                                data-minutes="25"
+                            >
+                                Focus
+                            </button>
+
+                            <button
+                                class="timer-mode-btn"
+                                data-minutes="5"
+                            >
+                                Short Break
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="timerDisplay"
+                            class="timer-display"
+                        >
+                            25:00
+                        </div>
+
+
+                        <div class="timer-controls">
+
+                            <button
+                                id="startTimer"
+                                class="primary-btn"
+                            >
+                                ▶ Start
+                            </button>
+
+                            <button
+                                id="resetTimer"
+                                class="secondary-btn"
+                            >
+                                ↻ Reset
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 SUBJECTS
+            =============================== -->
+
+            <section
+                id="subjects"
+                class="page"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            YOUR STUDIES
+                        </span>
+
+                        <h2>
+                            Subjects
+                        </h2>
+
+                        <p>
+                            Track your preparation progress.
+                        </p>
+
+                    </div>
+
+                    <button
+                        id="addSubjectBtn"
+                        class="primary-btn"
+                    >
+                        + Add Subject
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="subjectsList"
+                    class="subject-grid"
+                >
+
+                    <div class="empty-state glass">
+                        Add subjects to start tracking progress.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 SETTINGS
+            =============================== -->
+
+            <section
+                id="settings"
+                class="page"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            PERSONALIZE
+                        </span>
+
+                        <h2>
+                            Settings
+                        </h2>
+
+                        <p>
+                            Customize your Study Planner.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-list glass">
+
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <strong>
+                                Appearance
+                            </strong>
+
+                            <p>
+                                Switch between dark and light mode.
+                            </p>
+
+                        </div>
+
+                        <button
+                            id="settingsThemeBtn"
+                            class="secondary-btn"
+                        >
+                            Toggle Theme
+                        </button>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <strong>
+                                Daily Study Target
+                            </strong>
+
+                            <p>
+                                How many minutes do you want to study each day?
+                            </p>
+
+                        </div>
+
+                        <input
+                            id="dailyTargetInput"
+                            type="number"
+                            min="1"
+                            value="120"
+                            class="setting-input"
+                        >
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <strong>
+                                Default Pomodoro
+                            </strong>
+
+                            <p>
+                                Set your default focus duration.
+                            </p>
+
+                        </div>
+
+                        <input
+                            id="pomodoroInput"
+                            type="number"
+                            min="1"
+                            value="25"
+                            class="setting-input"
+                        >
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <strong>
+                                Data Export
+                            </strong>
+
+                            <p>
+                                Download your study data.
+                            </p>
+
+                        </div>
+
+                        <button
+                            id="exportBtn"
+                            class="secondary-btn"
+                        >
+                            Export Data
+                        </button>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <strong>
+                                Data Import
+                            </strong>
+
+                            <p>
+                                Restore previously exported data.
+                            </p>
+
+                        </div>
+
+                        <input
+                            type="file"
+                            id="importInput"
+                            accept=".json"
+                            class="file-input"
+                        >
+
+                    </div>
+
+
+                    <div class="setting-row danger-row">
+
+                        <div>
+
+                            <strong>
+                                Reset Data
+                            </strong>
+
+                            <p>
+                                Delete all locally stored study data.
+                            </p>
+
+                        </div>
+
+                        <button
+                            id="resetDataBtn"
+                            class="danger-btn"
+                        >
+                            Reset Everything
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </section>
+
+
+    <!-- ==============================
+         TOAST
+    =============================== -->
+
+    <div
+        id="toast"
+        class="toast"
+    ></div>
+
+
+    <!-- ==============================
+         MODAL
+    =============================== -->
+
+    <div
+        id="modal"
+        class="modal hidden"
+    >
+
+        <div class="modal-card glass">
+
+            <button
+                id="closeModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+            <h2 id="modalTitle">
+                Add
+            </h2>
+
+            <div id="modalContent"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
